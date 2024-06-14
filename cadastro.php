@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha'];
 
     $usuario = new Usuario($conn);
-    $mensagem = $usuario->cadastrar($nome, $email, $senha);
-    echo $mensagem;
+    $resultado = $usuario->cadastrar($nome, $email, $senha);
+    $mensagem = $resultado;
 }
 ?>
 
@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span></span>
             Create New Account
         </button>
+        <?= $mensagem ?>
     </form>
 </body>
 </html>

@@ -3,12 +3,12 @@ include 'conexao.php';
 include 'Usuario.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['mail'];
-    $senha = $_POST['password'];
+    $nome = $_POST['nome'];
+    $senha = $_POST['senha'];
 
     $usuario = new Usuario($conn);
-    $mensagem = $usuario->login($email, $senha);
-    echo $mensagem;
+    $resultado = $usuario->login($nome, $senha);
+    $mensagem = $resultado;
 }
 ?>
 
@@ -24,11 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form class="login" action="index.php" method="post">
         <h2>Login</h2>
         <div class="box-user">
-            <input type="text" name="" required>
+            <input type="text" name="nome" required>
             <label>User</label>
         </div>
         <div class="box-user">
-            <input type="password" name="" required>
+            <input type="password" name="senha" required>
             <label>Password</label>
         </div>
         <div class="forget">
@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span></span>
             Enter
         </a>
+        <?= $mensagem?>
     </form>
 </body>
 </html>

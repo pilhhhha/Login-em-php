@@ -25,22 +25,22 @@ class Usuario {
     }
 
 
-    public function login($email, $senha) {
+    public function login($nome, $senha) {
         $senhaHash = '';
 
-        $stmt = $this->conn->prepare("SELECT senha FROM usuarios WHERE email = ?");
+        $query = $this->conn->prepare("SELECT senha FROM usuarios WHERE nome = ?");
 
-        if ($stmt === false) {
+        if ($query === false) {
             return "Erro na preparação da consulta: " . $this->conn->error;
         }
 
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
+        $query->bind_param("s", $nome);
+        $query->execute();
+        $query->store_result();
 
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($senhaHash);
-            $stmt->fetch();
+        if ($query->num_rows > 0) {
+            $query->bind_result($senhaHash);
+            $query->fetch();
 
             if (!empty($senhaHash) && password_verify($senha, $senhaHash)) {
                 return "Login realizado com sucesso!";
